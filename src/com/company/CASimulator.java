@@ -48,13 +48,78 @@ public class CASimulator {
         gc.fillRect(0, 0, W, H);
     }
 
-    public void simulateOneStep() {
+    public void simulateOne1DStep() {
         for (Particle p : particles) {
             int chance = rand.nextInt(100) + 1;
             if (chance < 25) {
                 p.xCell++;
             } else if (chance < 50) {
                 p.xCell--;
+            }
+        }
+    }
+
+    public void simulateOne2DStep() {
+        for (Particle p : particles) {
+            int chance = rand.nextInt(10000) + 1;
+
+            // 20% chance for the outer ring
+            // 2up
+            if (chance < 250) {
+                p.xCell += 0;
+                p.yCell += -2;
+                // up right
+            } else if (chance < 500) {
+                p.xCell += 1;
+                p.yCell += -1;
+                // 2right
+            } else if (chance < 750) {
+                p.xCell += 2;
+                p.yCell += 0;
+            }
+            // down right
+            else if (chance < 1000) {
+                p.xCell += 1;
+                p.yCell += 1;
+            }
+            // 2down
+            else if (chance < 1250) {
+                p.xCell += 0;
+                p.yCell += 2;
+            }
+            // down left
+            else if (chance < 1500) {
+                p.xCell += -1;
+                p.yCell += -1;
+            }
+            // 2left
+            else if (chance < 1750) {
+                p.xCell += -2;
+                p.yCell += 0;
+                // up left
+            } else if (chance < 2000) {
+                p.xCell += -1;
+                p.yCell += -1;
+                // 30% chance for the inner ring
+                // up
+            } else if (chance < 2750) {
+                p.xCell += 0;
+                p.yCell += -1;
+                // right
+            } else if (chance < 3500) {
+                p.xCell += 1;
+                p.yCell += 0;
+                // down
+            } else if (chance < 4250) {
+                p.xCell += 0;
+                p.yCell += 1;
+                // left
+            } else if (chance < 5000) {
+                p.xCell += -1;
+                p.yCell += 0;
+                // 50% chance to not move
+            } else if (chance < 10000) {
+                // stay still
             }
         }
     }

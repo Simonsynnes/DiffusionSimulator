@@ -24,10 +24,10 @@ public class CAMain extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        W = 500;
-        H = 500;
-        cellsX = 100;
-        cellsY = 1;
+        W = 1000;
+        H = 800;
+        cellsX = 300;
+        cellsY = 300;
         step = 0;
 
         Group root = new Group();
@@ -44,13 +44,14 @@ public class CAMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        simulator.addParticle(50, 0);
+        simulator.addParticle(100, 100);
+        simulator.addParticle(200, 200);
 
         new AnimationTimer() {
             @Override
             public void handle(long currentNanoTime) {
                 simulator.drawAllParticles();
-                simulator.simulateOneStep();
+                simulator.simulateOne2DStep();
 
                 try {
                     Thread.sleep(10);
