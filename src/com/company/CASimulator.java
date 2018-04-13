@@ -90,7 +90,7 @@ public class CASimulator {
             // down left
             else if (chance < 1500) {
                 p.xCell += -1;
-                p.yCell += -1;
+                p.yCell += 1;
             }
             // 2left
             else if (chance < 1750) {

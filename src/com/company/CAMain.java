@@ -26,8 +26,8 @@ public class CAMain extends Application {
 
         W = 1000;
         H = 800;
-        cellsX = 300;
-        cellsY = 300;
+        cellsX = 1000;
+        cellsY = 800;
         step = 0;
 
         Group root = new Group();
@@ -44,8 +44,10 @@ public class CAMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        simulator.addParticle(100, 100);
-        simulator.addParticle(200, 200);
+        for (int i = 0; i <= 100; i++) {
+            for(int j = 0; j <= 100; j++)
+            simulator.addParticle(i*2, j*2);
+        }
 
         new AnimationTimer() {
             @Override
@@ -54,7 +56,7 @@ public class CAMain extends Application {
                 simulator.simulateOne2DStep();
 
                 try {
-                    Thread.sleep(10);
+                    Thread.sleep(0);
                 } catch (InterruptedException e) {
                     // Do nothing
                 }
