@@ -31,7 +31,7 @@ public class CAMain extends Application {
         step = 0;
 
         Group root = new Group();
-        Scene scene = new Scene(root, W, H, Color.BLACK);
+        Scene scene = new Scene(root, W, H, Color.WHITE);
 
         final Canvas canvas = new Canvas(W, H);
         GraphicsContext gc = canvas.getGraphicsContext2D();
