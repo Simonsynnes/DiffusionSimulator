@@ -44,9 +44,9 @@ public class CAMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        for (int i = 0; i <= 100; i++) {
-            for(int j = 0; j <= 100; j++)
-            simulator.addParticle(i*2, j*2);
+        for (int i = 0; i <= 20; i++) {
+            for(int j = 0; j <= 50; j++)
+            simulator.addParticle(i*10 + 400, j*4 + 300);
         }
 
         new AnimationTimer() {
