@@ -21,17 +21,23 @@ public class CAMain extends Application {
 
     private CASimulator simulator;
 
+    private int countSteps;
+
+    private boolean stop;
+
     @Override
     public void start(Stage primaryStage) {
 
-        W = 1000;
-        H = 800;
-        cellsX = 1000;
-        cellsY = 800;
+        W = 500;
+        H = 500;
+        cellsX = 100;
+        cellsY = 1;
         step = 0;
+        countSteps = 0;
+        stop = false;
 
         Group root = new Group();
-        Scene scene = new Scene(root, W, H, Color.WHITE);
+        Scene scene = new Scene(root, W, H, Color.BLACK);
 
         final Canvas canvas = new Canvas(W, H);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -44,25 +50,37 @@ public class CAMain extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
 
-        for (int i = 0; i <= 100; i++) {
-            for(int j = 0; j <= 100; j++)
-            simulator.addParticle(i*2 + 400, j*2 + 300);
-        }
-
-        new AnimationTimer() {
-            @Override
-            public void handle(long currentNanoTime) {
-                simulator.drawAllParticles();
-                simulator.simulateOne2DStep();
-
-                try {
-                    Thread.sleep(0);
-                } catch (InterruptedException e) {
-                    // Do nothing
-                }
+        for (int i=0; i <= 100; i++) {
+            {
+                simulator.addParticle(50, 0);
             }
-        }.start();
-        System.out.println("Done");
 
+            new AnimationTimer() {
+                @Override
+                public void handle(long currentNanoTime) {
+                    simulator.drawAllParticles();
+
+                    if (stop) {
+                        return;
+                    }
+
+                    if (countSteps <= 1000) {
+                        simulator.simulateOneStep(countSteps);
+                    } else {
+                        simulator.printAverageDistanceFromOrigo(countSteps);
+                        stop = true;
+                    }
+
+                    countSteps++;
+
+                    try {
+                        Thread.sleep(10);
+                    } catch (InterruptedException e) {
+                        // Do nothing
+                    }
+                }
+            }.start();
+            System.out.println("Done");
+        }
     }
 }

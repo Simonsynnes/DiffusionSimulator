@@ -13,7 +13,6 @@ public class CASimulator {
     private int H;
     private int cellsX;
     private int cellsY;
-    private int speed = 2;
     private ArrayList<Particle> particles;
 
     private GraphicsContext gc;
@@ -49,79 +48,39 @@ public class CASimulator {
         gc.fillRect(0, 0, W, H);
     }
 
-    public void simulateOne1DStep() {
-        for (Particle p : particles) {
+    public void simulateOneStep(int countSteps)
+    {
+        for (Particle p : particles)
+        {
             int chance = rand.nextInt(100) + 1;
-            if (chance < 25) {
+
+            if (chance < 25)
+            {
                 p.xCell++;
-            } else if (chance < 50) {
-                p.xCell--;
+
+                p.distanceFromOrigo++;
             }
+            else if (chance < 50)
+            {
+                p.xCell--;
+
+                p.distanceFromOrigo--;
+            }
+
+            printAverageDistanceFromOrigo(countSteps);
         }
     }
 
-    public void simulateOne2DStep() {
-        for (Particle p : particles) {
-            int chance = rand.nextInt(10000) + 1;
+    public void printAverageDistanceFromOrigo(int step)
+    {
+        int totalDistance = 0;
 
-            // 20% chance for the outer ring
-            // 2up
-            if (chance < 250) {
-                p.xCell += 0 * speed;
-                p.yCell += -2 * speed;
-                // up right
-            } else if (chance < 500) {
-                p.xCell += 1 * speed;
-                p.yCell += -1 * speed;
-                // 2right
-            } else if (chance < 750) {
-                p.xCell += 2 * speed;
-                p.yCell += 0 * speed;
-            }
-            // down right
-            else if (chance < 1000) {
-                p.xCell += 1 * speed;
-                p.yCell += 1 * speed;
-            }
-            // 2down
-            else if (chance < 1250) {
-                p.xCell += 0 * speed;
-                p.yCell += 2 * speed;
-            }
-            // down left
-            else if (chance < 1500) {
-                p.xCell += -1 * speed;
-                p.yCell += 1 * speed;
-            }
-            // 2left
-            else if (chance < 1750) {
-                p.xCell += -2 * speed;
-                p.yCell += 0 * speed;
-                // up left
-            } else if (chance < 2000) {
-                p.xCell += -1 * speed;
-                p.yCell += -1 * speed;
-                // 30% chance for the inner ring
-                // up
-            } else if (chance < 2750) {
-                p.xCell += 0 * speed;
-                p.yCell += -1 * speed;
-                // right
-            } else if (chance < 3500) {
-                p.xCell += 1 * speed;
-                p.yCell += 0 * speed;
-                // down
-            } else if (chance < 4250) {
-                p.xCell += 0 * speed;
-                p.yCell += 1 * speed;
-                // left
-            } else if (chance < 5000) {
-                p.xCell += -1 * speed;
-                p.yCell += 0 * speed;
-                // 50% chance to not move
-            } else if (chance < 10000) {
-                // stay still
-            }
+        for (Particle p : particles)
+        {
+            totalDistance += Math.sqrt(p.distanceFromOrigo * p.distanceFromOrigo);
         }
+
+        System.out.println("");
+        System.out.println("STEP:" + step + ", average distance: " + (totalDistance / particles.size()));
     }
 }
