@@ -38,7 +38,7 @@ public class CASimulator {
     public void drawAllParticles() {
         clearCanvas();
         for (Particle particle : particles) {
-            gc.setFill(Color.BLUE);
+            gc.setFill(Color.WHITE);
             gc.fillRect(particle.xCell * (W / cellsX), particle.yCell * (H / cellsY), W / cellsX, H / cellsY);
         }
     }
