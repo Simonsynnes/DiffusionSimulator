@@ -13,7 +13,7 @@ public class CASimulator {
     private int H;
     private int cellsX;
     private int cellsY;
-    private int speed = 1;
+    private int speed = 2;
     private ArrayList<Particle> particles;
 
     private GraphicsContext gc;
