@@ -31,7 +31,7 @@ public class CAMain extends Application {
         step = 0;
 
         Group root = new Group();
-        Scene scene = new Scene(root, W, H, Color.BLACK);
+        Scene scene = new Scene(root, W, H, Color.WHITE);
 
         final Canvas canvas = new Canvas(W, H);
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -46,7 +46,7 @@ public class CAMain extends Application {
 
         for (int i = 0; i <= 100; i++) {
             for(int j = 0; j <= 100; j++)
-            simulator.addParticle(i*2, j*2);
+            simulator.addParticle(i*2 + 400, j*2 + 300);
         }
 
         new AnimationTimer() {
